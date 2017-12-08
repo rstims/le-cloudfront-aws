@@ -2,14 +2,30 @@
   "name": "lets-encrypt-cloudfront",
   "version": "0.1.0",
   "description": "Generate, upload and install Let's Encrypt on Cloudfront",
-  "main": "index.js",
-  "author": "Ryan Stimmler @rstims",
+  "main": "./bin/index.js",
+  "author": "Ryan Stimmler (@rstims)",
   "license": "MIT",
   "private": false,
+  "preferGlobal": true,
+  "scripts": {
+    "dev": "npm run build && iws",
+    "build": "babel ./index.js --out-dir ./bin",
+    "test": "NODE_ENV=test nyc --report-dir ./tmp/coverage --silent mocha ./test/*.test.js --timeout 9000"
+  },
+  "bin": {
+    "le-cloudfront-aws": "./bin/index.js"
+  },
   "dependencies": {
     "aws-sdk": "^2.166.0",
     "bluebird": "^3.5.1",
     "letsencrypt-client": "^1.0.1",
-    "lodash.get": "^4.4.2"
+    "lodash.get": "^4.4.2",
+    "prettier": "^1.9.1",
+    "prompt": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1"
   }
 }
